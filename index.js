@@ -2,11 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('./db');
 const routes=require('./routes');
-
+const morgan = require('morgan');
+const path = require('path');
 const app = express();
 // const router = express.Router();
 app.use(express.json());
-app.use(cors({origin: 'http://localhost:4200'}));
+// app.use(cors({origin: 'http://localhost:4200'}));
 // app.listen(3000,()=> console.log('Server is listening at port 3000'));
 // router.use('/employee',routes);
 
@@ -18,8 +19,21 @@ const bodyParser = require('body-parser');
 const port=3000;
 // app.use(express.json());
 
+app.use(morgan('tiny'));
+app.use(bodyParser.urlencoded({extended:true}));
+
+// View engine
+app.set('view engine','ejs');
+// app.set('views',path.resolve(__dirname,'views.ejs'))
+
+// load assets
+app.use('/css',express.static(path.resolve(__dirname,"assets/css")));
+app.use('/img',express.static(path.resolve(__dirname,"assets/img")));
+app.use('/js',express.static(path.resolve(__dirname,"assets/js")));
+
 app.get('/',(req,res)=>{
-    res.send('Hello World')
+    // res.send('Hello World')
+    res.render('index');
 })
 
 app.listen(port,()=>{
