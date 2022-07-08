@@ -5,6 +5,9 @@ const routes=require('./routes');
 const morgan = require('morgan');
 const path = require('path');
 const app = express();
+const connectDB=require('./server/database/connection');
+const dotenv=require('dotenv');
+
 // const router = express.Router();
 app.use(express.json());
 // app.use(cors({origin: 'http://localhost:4200'}));
@@ -16,10 +19,12 @@ app.use(express.json());
 
 const bodyParser = require('body-parser');
 // const app = express();
-const port=3000;
+dotenv.config({path:'config.env'});
+const port=process.env.PORT||8080 ;
 // app.use(express.json());
 
 app.use(morgan('tiny'));
+connectDB();
 app.use(bodyParser.urlencoded({extended:true}));
 
 // View engine
