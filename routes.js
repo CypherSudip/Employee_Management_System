@@ -2,6 +2,14 @@ const express = require('express');
 const router=express.Router();
 const Employee=require('./employee');
 const ObjectId=require('mongoose').Types.ObjectId;
+// const services=require('../services/render');
+const services = require('./server/services/render');
+
+router.get('/',services.homeRoutes);
+router.get('/add-user',services.add_user);
+
+router.get('/update-user',services.update_user);
+
 
 // GET SINGLE EMPLOYEE
 router.get('/:id',(req,res)=>{

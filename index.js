@@ -31,10 +31,8 @@ app.use('/css',express.static(path.resolve(__dirname,"assets/css")));
 app.use('/img',express.static(path.resolve(__dirname,"assets/img")));
 app.use('/js',express.static(path.resolve(__dirname,"assets/js")));
 
-app.get('/',(req,res)=>{
-    // res.send('Hello World')
-    res.render('index');
-})
+// load routers
+app.use('/',require('./routes'))
 
 app.listen(port,()=>{
     console.log(`Example app listening at http://localhost:${port}`);
