@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('./db');
-const routes=require('./routes');
+const routes=require('./server/routes/routes');
 const morgan = require('morgan');
 const path = require('path');
 const app = express();
@@ -37,7 +37,7 @@ app.use('/img',express.static(path.resolve(__dirname,"assets/img")));
 app.use('/js',express.static(path.resolve(__dirname,"assets/js")));
 
 // load routers
-app.use('/',require('./routes'))
+app.use('/',require('./server/routes/routes'))
 
 app.listen(port,()=>{
     console.log(`Example app listening at http://localhost:${port}`);

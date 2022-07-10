@@ -1,14 +1,21 @@
 const express = require('express');
 const router=express.Router();
-const Employee=require('./employee');
+const Employee=require('../model/employee');
 const ObjectId=require('mongoose').Types.ObjectId;
 // const services=require('../services/render');
-const services = require('./server/services/render');
+const services = require('../services/render');
+const controller=require('../controller/controller');
 
 router.get('/',services.homeRoutes);
 router.get('/add-user',services.add_user);
 
 router.get('/update-user',services.update_user);
+
+
+router.post('/api/users',controller.create);
+router.delete('/api/users/:id',controller.delete);
+router.get('/api/users/',controller.find);
+router.put('/api/users/:id',controller.update);
 
 
 // GET SINGLE EMPLOYEE
